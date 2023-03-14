@@ -10,7 +10,6 @@ using Siemens.Engineering.HmiUnified.UI.Screens;
 
 namespace MigrateHMI
 {
-	// Token: 0x02000004 RID: 4
 	public class HmiUnifiedScreen
 	{
 		public FileInfo fileInfo { get; private set; }
@@ -40,8 +39,6 @@ namespace MigrateHMI
 			this.ImportGraphicViews();
 			this.ImportCircle();
 		}
-
-		// Token: 0x0600002E RID: 46 RVA: 0x00002A60 File Offset: 0x00000C60
 		private string GetScreenName(HmiSoftware target, string screen)
 		{
 			int num = 1;
@@ -59,8 +56,6 @@ namespace MigrateHMI
 			}
 			return text;
 		}
-
-		// Token: 0x0600002F RID: 47 RVA: 0x00002AD8 File Offset: 0x00000CD8
 		public HmiScreen CreateScreen()
 		{
 			HmiScreen hmiScreen = null;
@@ -89,8 +84,6 @@ namespace MigrateHMI
 			}
 			return hmiScreen;
 		}
-
-		// Token: 0x06000030 RID: 48 RVA: 0x00002BC8 File Offset: 0x00000DC8
 		private void ImportHmiUnifiedBackColor()
 		{
 			XElement xelement = (from element in (from elements in (from elements in this.screenElement.Elements("Hmi.Screen.Screen")
@@ -118,8 +111,6 @@ namespace MigrateHMI
 			this.AttributeErrorsDictionary.Add("BackColor", value);
 			this.AttributeElementDictionary.Add(xelement, true);
 		}
-
-		// Token: 0x06000031 RID: 49 RVA: 0x00002D14 File Offset: 0x00000F14
 		private void ImportHmiUnifiedScreenNumber()
 		{
 			XElement xelement = (from element in (from elements in (from elements in this.screenElement.Elements("Hmi.Screen.Screen")
@@ -141,8 +132,6 @@ namespace MigrateHMI
 			this.AttributeErrorsDictionary.Add("ScreenNumber", xelement.Value);
 			this.AttributeElementDictionary.Add(xelement, true);
 		}
-
-		// Token: 0x06000032 RID: 50 RVA: 0x00002E30 File Offset: 0x00001030
 		private void ImportGraphicViews()
 		{
 			IEnumerable<XElement> enumerable = from elements in (from elements in (from elements in (from elements in this.screenElement.Elements("Hmi.Screen.Screen")
@@ -160,8 +149,6 @@ namespace MigrateHMI
 				this.screenItems.Add(new HmiUnifiedGraphicView(this.hmiUnifiedTarget, this.Name, graphicViewElement));
 			}
 		}
-
-		// Token: 0x06000033 RID: 51 RVA: 0x00002FD4 File Offset: 0x000011D4
 		private void ImportCircle()
 		{
 			foreach (XElement screenItemElement in from elements in (from elements in (from elements in (from elements in (from elements in this.screenElement.Elements("Hmi.Screen.Screen")
@@ -174,8 +161,6 @@ namespace MigrateHMI
 				this.screenItems.Add(new HmiUnifiedCircle(this.hmiUnifiedTarget, this.Name, screenItemElement));
 			}
 		}
-
-		// Token: 0x06000034 RID: 52 RVA: 0x00003138 File Offset: 0x00001338
 		public HmiUnifiedScreen(HmiSoftware target, string screenName)
 		{
 			this.hmiUnifiedTarget = target;
@@ -183,8 +168,6 @@ namespace MigrateHMI
 			this.screenItems = new List<HmiUnifiedScreenItemBase>();
 			this.CreateScreen(screenName);
 		}
-
-		// Token: 0x06000035 RID: 53 RVA: 0x00003170 File Offset: 0x00001370
 		private string GetScreenName(string screen)
 		{
 			int num = 1;
@@ -202,8 +185,6 @@ namespace MigrateHMI
 			}
 			return text;
 		}
-
-		// Token: 0x06000036 RID: 54 RVA: 0x000031F8 File Offset: 0x000013F8
 		private HmiScreen CreateScreen(string name)
 		{
 			string screenName = this.GetScreenName(name);
@@ -217,8 +198,6 @@ namespace MigrateHMI
 			}
 			return this.screen;
 		}
-
-		// Token: 0x06000037 RID: 55 RVA: 0x0000324C File Offset: 0x0000144C
 		public bool setName(string attributeValue)
 		{
 			bool result = false;
@@ -235,17 +214,9 @@ namespace MigrateHMI
 			}
 			return result;
 		}
-
-		// Token: 0x0400000F RID: 15
 		private HmiSoftware hmiUnifiedTarget;
-
-		// Token: 0x04000010 RID: 16
 		private XElement screenElement;
-
-		// Token: 0x04000015 RID: 21
 		private Dictionary<string, object> attributes = new Dictionary<string, object>();
-
-		// Token: 0x04000019 RID: 25
 		private HmiScreen screen;
 	}
 }

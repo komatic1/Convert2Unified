@@ -14,17 +14,14 @@ namespace MigrateHMI
 {
 	public class MigrationAddin : ContextMenuAddIn
     {	
-		// 
 		public MigrationAddin(TiaPortal tiaPortal) : base("Migration2Unified")
 		{
-            // 
             if (tiaPortal == null)
 			{
 				throw new ArgumentNullException("tiaPortal");
 			}
 			m_TiaPortal = tiaPortal;
 		}
-        
 		protected override void BuildContextMenuItems(ContextMenuAddInRoot addInRootSubmenu)
 		{
 			addInRootSubmenu.Items.AddActionItem<Device>("RunIt", new ActionItem<Device>.OnClickDelegate(this.OnClick_LaunchUI));
@@ -33,7 +30,6 @@ namespace MigrateHMI
         }
         private void OnClick_LaunchUI(MenuSelectionProvider<Device> selectionProvider)
 		{
-			
             string text = this.WriteApplicationToTempFolder(this.exeName, this.dllNames);
 			IEnumerable<Device> selection = selectionProvider.GetSelection<Device>();
 			string text2 = this.GetHmiTarget(selection);
@@ -41,7 +37,6 @@ namespace MigrateHMI
 			text2 = text2 + " -A \"" + this.m_TiaPortal.GetCurrentProcess().Path.ToString() + "\"";
 			Process.Start(text, text2);
 		}
-
 		private string WriteApplicationToTempFolder(string exeResource, string[] referenceResources = null)
 		{
 			string temporaryDirectory = this.GetTemporaryDirectory();
@@ -55,30 +50,22 @@ namespace MigrateHMI
 			}
 			return Path.Combine(temporaryDirectory, this.GetFileNameFromResource(exeResource));
 		}
-
-		// Token: 0x06000045 RID: 69 RVA: 0x00003462 File Offset: 0x00001662
 		private byte[] GetResourceStream(string name)
 		{
 			BinaryReader binaryReader = new BinaryReader(base.GetType().Assembly.GetManifestResourceStream(name));
 			return binaryReader.ReadBytes((int)binaryReader.BaseStream.Length);
 		}
-
-		// Token: 0x06000046 RID: 70 RVA: 0x0000348B File Offset: 0x0000168B
 		private string GetTemporaryDirectory()
 		{
 			string text = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 			Directory.CreateDirectory(text);
 			return text;
 		}
-
-		// Token: 0x06000047 RID: 71 RVA: 0x000034A4 File Offset: 0x000016A4
 		private string GetFileNameFromResource(string resourceName)
 		{
 			string text = "MigrateHMI.OpennessExe.";
 			return resourceName.Substring(text.Length);
 		}
-
-		// Token: 0x06000048 RID: 72 RVA: 0x000034C4 File Offset: 0x000016C4
 		private string GetHmiTarget(IEnumerable<Device> devices)
 		{
 			string text = string.Empty;
@@ -107,14 +94,8 @@ namespace MigrateHMI
 			}
 			return text;
 		}
-
-		// Token: 0x0400001E RID: 30
 		private readonly TiaPortal m_TiaPortal;
-
-		// Token: 0x0400001F RID: 31
 		private readonly string exeName = "MigrateHMI.OpennessExe.Data2UnifiedTool.exe";
-
-		// Token: 0x04000020 RID: 32
 		private readonly string[] dllNames = new string[]
 		{
 			"MigrateHMI.OpennessExe.BusinessLogic.dll",
